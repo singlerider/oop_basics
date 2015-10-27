@@ -29,14 +29,18 @@ fish.number_of_legs = 0
 
 class Dog(Animal):
 
+    def sleep(self):
+        print "Dog is chasing its tail while it sleeps" # overwrite Animal sleep()
+
     def bark(self):
         print "woof"
 
 
 spunky = Dog() # Instantiate a Dog Instance (inheriting Animal's attributes)
 #spunky.bark() # Run bark method inside the spunky instance
-spunky.number_of_legs = 4
+spunky.number_of_legs = 3 # spunky is a 3-legged dog
 #spunky.count_legs()
+spunky.sleep()
 
 class Human:
 
@@ -45,6 +49,7 @@ class Human:
     weight = 0
     name = ""
     age = 0
+    language = "English" # We won't overwrite this in any inherited classes
 
     def __init__(self): # runs this code immediately no matter what
         print "Hello there"
@@ -55,6 +60,7 @@ class Human:
 
 
 class Enemy:
+
     def __init__(self, x):
         self.energy = x # Set this instance's energy variable to x when called
 
@@ -68,11 +74,12 @@ sandy = Enemy(18)
 jason.get_energy()
 sandy.get_energy()
 
-class Shane(Human): # Inherits attributes from Human class
+class Shane(Human):
 
     def print_stats(self):
-        print "{} is {}, {} inches, {} lbs., and has {} hair.".format(self.name,
-         self.age, self.height, self.weight, self.hair_color)
+        print "{} is {}, {} inches, {} lbs., speaks {} and has {} hair.".format(
+        self.name, self.age, self.height, self.weight, self.language, self.hair_color)
+         # language comes from the Human class
 
 
 shane = Shane()
@@ -81,6 +88,8 @@ shane.height = 70
 shane.weight = 15
 shane.name = "Shane"
 shane.age = 27
+print "Human default language: ", Human.language
+print "Inherited language from Human in shane instance: ", shane.language
 shane.print_stats()
 
 print json.dumps(vars(shane)) # Returns variables as a dict, then as JSON
